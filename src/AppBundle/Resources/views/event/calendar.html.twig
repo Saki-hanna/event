@@ -1,0 +1,50 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('public/libs/fullcalendar-3.4.0/fullcalendar.css') }}">
+{% endblock %}
+
+{% block main %}
+    <div id='calendar'></div>
+{% endblock main %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script src='{{ asset('public/libs/fullcalendar-3.4.0/fullcalendar.js') }}'></script>
+    <script src='{{ asset('public/libs/fullcalendar-3.4.0/locale/fr.js') }}'></script>
+
+    <script>
+        $('#calendar').fullCalendar({
+            locale: 'fr',
+            height: 'auto',
+            header: {
+                left:'',
+                center: 'title',
+                right:''
+            },
+            views: {
+                month: { // name of view
+                    titleFormat: 'MMMM YYYY',
+                    showNonCurrentDates : false
+                    // other view-specific options here
+                }
+            },
+            events: [
+                {% for event in allEvents %}
+                {
+                    id: {{ event.id }},
+                    title: '{{ event.title }}',
+                    start: new Date({{ event.start|date('Y,m-1,d,H,i,s') }}),
+                    end: new Date({{ event.start|date('Y,m-1,d,H,i,s') }}),
+                    allDay: {% if (event.allDay) %}true{% else %}false{% endif %},
+                    className: 'info'
+                }{% if not(loop.last) %},{% endif %}
+                {% endfor %}
+            ]
+        });
+    </script>
+
+{% endblock javascript %}
+

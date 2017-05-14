@@ -1,0 +1,9 @@
+1:
+  title: déménagement
+  all_day: true
+  start: 13/05/2017
+2:
+  title: l'usine
+  all_day: false
+  start: 21/05/2017 8:00
+  end: 21/05/2017 17:00

@@ -1,0 +1,44 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block main %}
+    <h1>Events list</h1>
+    <a class="btn btn-primary pull-right" href="{{ path('event_calendar') }}">Voir le calendrier</a>
+    <a class="btn btn-primary pull-right" href="{{ path('event_new') }}">Nouvelle évènement</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in allEvents %}
+            <tr>
+                <td>{{ event.title }}</td>
+                {% if(event.allDay ) %}
+                    <td>{{ event.start|date('d/m/Y') }}</td>
+                    <td>{{ event.end|date('d/m/Y') }}</td>
+                {% else %}
+                    <td>{{ event.start|date('d/m/Y H:i') }}</td>
+                    <td>{{ event.end|date('d/m/Y H:i') }}</td>
+                {% endif %}
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('event_show', { 'id': event.id }) }}">Plus d'info</a></li>
+                            <li> <a href="{{ path('event_edit', { 'id': event.id }) }}">Modifier</a></li>
+                            <li> <a href="{{ path('event_edit', { 'id': event.id }) }}">Supprimer</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block main %}
+    <h1>Event creation</h1>
+
+    {{ form_start(form, {
+        'attr' :{'class':'form-horizontal'}
+    }) }}
+    {{ form_errors(form) }}
+
+{% include 'AppBundle:Event/BackLog:form.html.twig' %}
+
+
+    <div class="form-group pull-right">
+        {{ form_widget(form.submit, {
+            'label': 'Enregistrer',
+            'attr' :{'class':'btn btn-success'},
+        }) }}
+        <a class="btn btn-default" href="{{ path('event_list') }}">Retour</a>
+    </div>
+
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+

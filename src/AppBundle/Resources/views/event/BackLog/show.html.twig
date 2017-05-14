@@ -1,0 +1,43 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block main %}
+    <h1>Event</h1>
+
+    <table  class="table">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ event.title }}</td>
+            </tr>
+            {% if(event.allDay ) %}
+                <tr>
+                    <th>Début</th>
+                    <td>{{ event.start|date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <th>Fin</th>
+                    <td>{{ event.end|date('d/m/Y') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th>Début</th>
+                    <td>{{ event.start|date('d/m/Y H:i') }}</td>
+                </tr>
+                <tr>
+                    <th>Fin</th>
+                    <td>{{ event.end|date('d/m/Y H:i') }}</td>
+                </tr>
+            {% endif %}
+
+        </tbody>
+    </table>
+
+    <a class="btn btn-default" href="{{ path('event_list') }}">Retour</a>
+    <a class="btn btn-warning" href="{{ path('event_edit', { 'id': event.id }) }}">Modifier</a>
+    {{ form_start(delete_form) }}
+    {{ form_widget(delete_form.submit, {
+        'label': 'Supprimer',
+        'attr' :{'class':'btn btn-danger'},
+    }) }}
+    {{ form_end(delete_form) }}
+{% endblock %}

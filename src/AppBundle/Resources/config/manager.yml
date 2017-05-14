@@ -1,0 +1,9 @@
+services:
+    controller_manager.abstract:
+        abstract: true
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    manager.event:
+        class: 'AppBundle\Manager\EventManager'
+        parent: controller_manager.abstract

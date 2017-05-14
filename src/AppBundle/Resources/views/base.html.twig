@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    {% block meta %}
+        <meta charset="UTF-8">
+    {% endblock meta %}
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{{ asset('public/libs/bootstrap-3.3.6/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/libs/bootstrap-datepicker-1.6.4/css/bootstrap-datepicker.min.css') }}">
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <header>
+        {% block header %}{% endblock header %}
+    </header>
+
+    <main class="container">
+        {% block main %}{% endblock main %}
+    </main>
+
+    <footer>
+        {% block footer %}{% endblock footer %}
+    </footer>
+{% block javascript %}
+    <script src="{{ asset('public/libs/jquery-2.1.4/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/libs/bootstrap-3.3.6/js/bootstrap.min.js') }}"></script>
+    <script src='{{ asset('public/libs/fullcalendar-3.4.0/lib/moment.min.js') }}'></script>
+
+
+    <script src='{{ asset('public/js/event.js') }}'></script>
+{% endblock javascript %}
+{% endblock body %}
+</body>
+</html>
